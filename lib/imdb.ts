@@ -84,11 +84,33 @@ async function scrapeReviews(imdbId: string): Promise<string[]> {
     const $ = cheerio.load(html);
 
     const reviews: string[] = [];
-    $('.text.show-more__control').each((i, el) => {
-      if (i < 10) { // Limit to 10 reviews
-        reviews.push($(el).text().trim());
+    
+    // 1. Create a list of all the ways IMDb might hide the reviews
+    const possibleSelectors = [
+      '.ipc-html-content-inner-div', // Newer IMDb layout
+      '.text.show-more__control',    // The old layout you originally used
+      'div.text',                    // Generic fallback
+      '.review-container .text'      // Another older layout
+    ];
+
+    // 2. Try each CSS selector one by one
+    for (const selector of possibleSelectors) {
+      $(selector).each((i, el) => {
+        if (i < 10) { // Limit to 10 reviews
+          reviews.push($(el).text().trim());
+        }
+      });
+      
+      // 3. If we successfully found reviews with this selector, stop looking!
+      if (reviews.length > 0) {
+         break; 
       }
-    });
+    }
+
+    // 4. Safety check warning so you know if it completely fails in the future
+    if (reviews.length === 0) {
+      console.warn(`[Scraper Warning]: 0 reviews found for ${imdbId}. IMDb may have changed their HTML/CSS again.`);
+    }
 
     return reviews;
   } catch (e) {
