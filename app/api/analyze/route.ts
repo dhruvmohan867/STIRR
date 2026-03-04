@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import { scrapeMovieData } from "../../../lib/imdb";
 import { analyzeSentiment } from "../../../lib/gemini";
 
+// Simple in-memory cache to prevent repeated API/Scraping calls
+const analysisCache = new Map<string, any>();
+
 export async function POST(req: Request) {
   try {
     const { imdbId } = await req.json();
@@ -13,14 +16,19 @@ export async function POST(req: Request) {
       );
     }
 
+    // NEW: Check if we already searched this ID to save time and API costs
+    if (analysisCache.has(imdbId)) {
+      return NextResponse.json(analysisCache.get(imdbId));
+    }
+
     // 1. Scrape Movie Metadata and Reviews
     const movieData = await scrapeMovieData(imdbId);
 
     // 2. Analyze Sentiment with Gemini
     const sentimentResult = await analyzeSentiment(movieData.reviews);
 
-    // 3. Return Combined Payload
-    return NextResponse.json({
+    // 3. Create Combined Payload
+    const payload = {
       title: movieData.title,
       year: movieData.year,
       rating: movieData.rating,
@@ -29,7 +37,12 @@ export async function POST(req: Request) {
       cast: movieData.cast,
       sentiment: sentimentResult.summary,
       classification: sentimentResult.classification,
-    });
+    };
+
+    // NEW: Save to cache before returning
+    analysisCache.set(imdbId, payload);
+    return NextResponse.json(payload);
+    
   } catch (error: any) {
     console.error("API Route Error:", error);
     return NextResponse.json(

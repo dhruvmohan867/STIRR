@@ -4,11 +4,25 @@ import { useState } from "react";
 import { Search, Film, Star, AlertCircle, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+// --- WE ADDED THIS INTERFACE ---
+interface AnalyzeResult {
+  title: string;
+  year: string;
+  rating: string;
+  poster: string;
+  plot: string;
+  cast: string;
+  sentiment: string;
+  classification: "positive" | "mixed" | "negative";
+}
+
 export default function Home() {
   const [imdbId, setImdbId] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<any | null>(null); // Replace 'any' with the proper type later
+  
+  // --- WE CHANGED 'any' TO 'AnalyzeResult' HERE ---
+  const [result, setResult] = useState<AnalyzeResult | null>(null);
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
