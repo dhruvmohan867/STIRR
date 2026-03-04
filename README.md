@@ -39,7 +39,7 @@ Follow these instructions to set up the project locally on your machine.
 
 1. **Clone the repository**
    ```bash
-   git clone [https://github.com/dhruvmohan867/STIRR.git](https://github.com/dhruvmohan867/STIRR.git)
+   git clone https://github.com/dhruvmohan867/STIRR.git
    
 # 2. Navigate into the project directory
 cd STIRR
@@ -68,4 +68,19 @@ npm run dev
 ├── package.json               # Project dependencies
 └── tsconfig.json              # TypeScript configuration
 
+```
+### 🤝 Contributing
+ 
+ ```
+ Contributions, issues, and feature requests are welcome! Feel free to check out the issues page.
+
+Fork the Project
+
+Create your Feature Branch (git checkout -b feature/AmazingFeature)
+
+Commit your Changes (git commit -m 'Add some AmazingFeature')
+
+Push to the Branch (git push origin feature/AmazingFeature)
+
+Open a Pull Request
 ```
