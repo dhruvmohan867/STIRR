@@ -9,7 +9,11 @@
 
 A sleek, modern web application that utilizes Google's Gemini AI to analyze the true audience sentiment of any IMDb movie. Enter a movie ID, and the app instantly scrapes metadata, aggregates user reviews, and generates an insightful AI-powered sentiment classification.
 
-## ✨ Features
+## 📸 Screenshot
+
+![IMDb Sentiment Analyzer App Screenshot](public/IMDB_PAGE.png)
+
+### ✨ Features
 
 - **🧠 AI Sentiment Analysis:** Leverages Google's `gemini-2.5-flash` model to summarize thousands of review words into a concise 2-3 sentence insight.
 - **📊 Real-time Data Scraping:** Uses `cheerio` to extract rich movie metadata (posters, cast, rating, plot) and user reviews directly from IMDb using JSON-LD and robust CSS fallbacks.
@@ -18,7 +22,7 @@ A sleek, modern web application that utilizes Google's Gemini AI to analyze the 
 - **🛡️ Type-Safe & Error Proof:** Developed with strict TypeScript interfaces and comprehensive error handling for invalid IDs and missing data.
 - **🛠️ Mock Mode:** Automatically falls back to a mocked AI response for UI testing if the Gemini API key is not provided.
 
-## 💻 Tech Stack
+### 💻 Tech Stack
 
 - **Frontend:** Next.js (App Router), React 19, TypeScript
 - **Styling & Animations:** Tailwind CSS v4, Framer Motion, Lucide React (Icons)
@@ -26,7 +30,7 @@ A sleek, modern web application that utilizes Google's Gemini AI to analyze the 
 - **Scraping:** Cheerio
 - **AI Integration:** `@google/genai` (Gemini API)
 
-## 🚀 Getting Started
+### 🚀 Getting Started
 
 Follow these instructions to set up the project locally on your machine.
 
@@ -41,16 +45,23 @@ Follow these instructions to set up the project locally on your machine.
    ```bash
    git clone https://github.com/dhruvmohan867/STIRR.git
    
-# 2. Navigate into the project directory
+### 2. Navigate into the project directory
+```
 cd STIRR
 
-# 3. Install dependencies
+```
+### 3. Install dependencies
+```
 npm install
-
-# 4. Start the development server
+```
+### 4. Start the development server
+```
 npm run dev
+```
 
-## Once the server is running, open http://localhost:3000 in your browser. Enter an IMDb ID (e.g., tt0133093 for The Matrix) to test the application!
+---
+### Once the server is running, open http://localhost:3000 in your browser. Enter an IMDb ID (e.g., tt0133093 for The Matrix) to test the application!
+---
 
 ## 📁 Project Structure
 
